@@ -1,16 +1,16 @@
-import { makeStyles, Paper, PaperProps, Theme } from "@material-ui/core";
+import { Grow, makeStyles, Paper, PaperProps, Theme } from "@material-ui/core";
+import clsx from "clsx";
 import color from "color";
-import { ReactNode } from "react";
 
 const useStyles = (c: string) =>
   makeStyles((theme: Theme) => ({
     glass: {
-      borderLeft: `solid 1px ${color(c).fade(0.4).toString()}`,
-      borderTop: `solid 1px ${color(c).fade(0.9).toString()}`,
-      backgroundColor: "transparent",
+      borderLeft: `solid 1px ${color(c).alpha(0.5).toString()}`,
+      borderTop: `solid 1px ${color(c).alpha(1).toString()}`,
+      backgroundColor: color(c).alpha(0.5).toString(),
       backgroundImage: `linear-gradient(to bottom right, ${color(c)
-        .fade(0.2)
-        .toString()}, ${color(c).fade(1).toString()})`,
+        .alpha(0.7)
+        .toString()}, ${color(c).alpha(0).toString()})`,
       backdropFilter: "blur(7px)",
     },
     glassRounded: {
@@ -19,23 +19,24 @@ const useStyles = (c: string) =>
   }));
 
 export interface GlassCardProps extends PaperProps {
-  children?: ReactNode;
   color?: string;
 }
 
 function GlassCard(props: GlassCardProps) {
-  const { color = "#ffffff", ...rest } = props;
+  const { color = "#ffffff", className, ...rest } = props;
   const classes = useStyles(color)();
 
   return (
+    <Grow in >
     <Paper
-      className={classes.glass}
+      className={clsx(classes.glass, className)}
       classes={{
         rounded: classes.glassRounded,
       }}
       elevation={20}
       {...rest}
     />
+    </Grow>
   );
 }
 

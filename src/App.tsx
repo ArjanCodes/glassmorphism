@@ -15,6 +15,7 @@ import {
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import GlassCard from "./GlassCard";
+import { GrowList } from "./GrowList";
 
 const useStyles = makeStyles((theme: Theme) => ({
   app: {
@@ -40,10 +41,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
@@ -68,15 +65,15 @@ function App() {
     <div className={classes.app}>
       <CssBaseline />
       <Container maxWidth="sm" className={classes.container}>
-        <GlassCard>
-          <div className={classes.paper}>
-            <Avatar className={classes.avatar}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Sign in
-            </Typography>
-            <form className={classes.form} noValidate>
+        <form>
+          <GlassCard>
+            <GrowList className={classes.paper}>
+              <Avatar className={classes.avatar}>
+                <LockOutlinedIcon />
+              </Avatar>
+              <Typography component="h1" variant="h5">
+                Sign in
+              </Typography>
               <TextField
                 variant="outlined"
                 margin="normal"
@@ -100,6 +97,7 @@ function App() {
                 autoComplete="current-password"
               />
               <FormControlLabel
+                style={{ width: "100%" }}
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
               />
@@ -120,16 +118,17 @@ function App() {
                 </Grid>
                 <Grid item>
                   <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
+                    Don't have an account? Sign Up
                   </Link>
                 </Grid>
               </Grid>
-            </form>
-            <Box mt={4}>
-              <Copyright />
-            </Box>
-          </div>
-        </GlassCard>
+
+              <Box mt={4}>
+                <Copyright />
+              </Box>
+            </GrowList>
+          </GlassCard>
+        </form>
       </Container>
     </div>
   );
