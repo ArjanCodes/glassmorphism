@@ -30,8 +30,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingTop: 100,
     padding: theme.spacing(4),
   },
-  paper: {
-    marginTop: theme.spacing(6),
+  content: {
+    paddingTop: theme.spacing(6),
     padding: theme.spacing(2),
     display: "flex",
     flexDirection: "column",
@@ -67,7 +67,7 @@ function App() {
       <Container maxWidth="sm" className={classes.container}>
         <form>
           <GlassCard>
-            <GrowList className={classes.paper}>
+            <GrowList className={classes.content}>
               <Avatar className={classes.avatar}>
                 <LockOutlinedIcon />
               </Avatar>

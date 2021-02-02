@@ -1,41 +1,55 @@
-import { Grow, makeStyles, Paper, PaperProps, Theme } from "@material-ui/core";
+import { Grow, makeStyles, Theme } from "@material-ui/core";
 import clsx from "clsx";
 import color from "color";
+import { DetailedHTMLProps, HTMLAttributes } from "react";
 
-const useStyles = (c: string) =>
+const useStyles = (c: string, blur: number = 7) =>
   makeStyles((theme: Theme) => ({
     glass: {
-      borderLeft: `solid 1px ${color(c).alpha(0.5).toString()}`,
-      borderTop: `solid 1px ${color(c).alpha(1).toString()}`,
-      backgroundColor: color(c).alpha(0.5).toString(),
+      backgroundColor: color(c).alpha(0.4).toString(),
       backgroundImage: `linear-gradient(to bottom right, ${color(c)
-        .alpha(0.7)
+        .alpha(0.2)
         .toString()}, ${color(c).alpha(0).toString()})`,
-      backdropFilter: "blur(7px)",
+      backdropFilter: `blur(${blur}px)`,
+      boxShadow: "10px 10px 10px rgba(30, 30, 30, 0.1)",
+    },
+    glassBorders: {
+      borderLeft: `solid 1px ${color(c).alpha(0.3).toString()}`,
+      borderTop: `solid 1px ${color(c).alpha(0.8).toString()}`,
     },
     glassRounded: {
       borderRadius: theme.spacing(2),
     },
   }));
 
-export interface GlassCardProps extends PaperProps {
+export interface GlassCardProps
+  extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   color?: string;
+  noBorders?: boolean;
+  square?: boolean;
+  blur?: number;
 }
 
 function GlassCard(props: GlassCardProps) {
-  const { color = "#ffffff", className, ...rest } = props;
-  const classes = useStyles(color)();
+  const {
+    color = "#ffffff",
+    blur,
+    noBorders,
+    square,
+    className,
+    ...rest
+  } = props;
+  const classes = useStyles(color, blur)();
 
   return (
-    <Grow in >
-    <Paper
-      className={clsx(classes.glass, className)}
-      classes={{
-        rounded: classes.glassRounded,
-      }}
-      elevation={20}
-      {...rest}
-    />
+    <Grow in>
+      <div
+        className={clsx(classes.glass, className, {
+          [classes.glassBorders]: !noBorders,
+          [classes.glassRounded]: !square,
+        })}
+        {...rest}
+      />
     </Grow>
   );
 }
