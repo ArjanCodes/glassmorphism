@@ -1,7 +1,6 @@
-import { Grow, makeStyles, Theme } from "@material-ui/core";
+import { Box, BoxProps, makeStyles, Theme } from "@material-ui/core";
 import clsx from "clsx";
 import color from "color";
-import { DetailedHTMLProps, HTMLAttributes } from "react";
 
 const useStyles = (c: string, blur: number = 7) =>
   makeStyles((theme: Theme) => ({
@@ -22,8 +21,7 @@ const useStyles = (c: string, blur: number = 7) =>
     },
   }));
 
-export interface GlassCardProps
-  extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+export interface GlassCardProps extends BoxProps {
   color?: string;
   noBorders?: boolean;
   square?: boolean;
@@ -42,15 +40,13 @@ function GlassCard(props: GlassCardProps) {
   const classes = useStyles(color, blur)();
 
   return (
-    <Grow in>
-      <div
-        className={clsx(classes.glass, className, {
-          [classes.glassBorders]: !noBorders,
-          [classes.glassRounded]: !square,
-        })}
-        {...rest}
-      />
-    </Grow>
+    <Box
+      className={clsx(classes.glass, className, {
+        [classes.glassBorders]: !noBorders,
+        [classes.glassRounded]: !square,
+      })}
+      {...rest}
+    />
   );
 }
 
