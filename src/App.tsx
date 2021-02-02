@@ -15,7 +15,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import GlassCard from "./GlassCard";
+import { GlassCard } from "./GlassCard";
 import { GrowList } from "./GrowList";
 
 const useStyles = makeStyles((theme: Theme) => ({

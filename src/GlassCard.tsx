@@ -28,7 +28,7 @@ export interface GlassCardProps extends BoxProps {
   blur?: number;
 }
 
-function GlassCard(props: GlassCardProps) {
+export function GlassCard(props: GlassCardProps) {
   const {
     color = "#ffffff",
     blur,
@@ -49,5 +49,3 @@ function GlassCard(props: GlassCardProps) {
     />
   );
 }
-
-export default GlassCard;
